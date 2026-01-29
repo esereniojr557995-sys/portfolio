@@ -1,0 +1,33 @@
+body{
+    margin: 0;
+    background-color: bisque;
+}
+.container{
+    text-align: center;
+}
+h1{
+    padding-top: 20px;
+    background-color: burlywood;
+    margin: 0;
+}
+h3{
+    margin: 0;
+    text-decoration: underline;
+    padding-bottom: 20px;
+}
+.name{
+    font-weight: bolder;
+    font-size: large;
+    color: blueviolet;
+    text-decoration: underline;
+}
+.univ{
+    color: red;
+    font-weight: bolder;
+    text-decoration: underline;
+}
+.prog{
+    color: burlywood;
+    font-weight: bolder;
+    font-style: italic;
+}
