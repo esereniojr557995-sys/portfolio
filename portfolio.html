@@ -1,809 +1,899 @@
 cat > /mnt/user-data/outputs/portfolio_enhanced.html << 'ENDOFFILE'
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Eric Serenio - Portfolio</title>
-
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  
-  <!-- Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --primary: #2C3E50;
-      --secondary: #34495E;
-      --accent: #E74C3C;
-      --accent-light: #FF6B6B;
-      --light: #ECF0F1;
-      --dark: #1A252F;
-      --text-dark: #2C3E50;
-      --text-light: #7F8C8D;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Work Sans', sans-serif;
-      color: var(--text-dark);
-      overflow-x: hidden;
-      background: var(--light);
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-    }
-
-    .navbar {
-      background: rgba(26, 37, 47, 0.95) !important;
-      backdrop-filter: blur(10px);
-      padding: 1.2rem 0;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .navbar-brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      font-weight: 900;
-      letter-spacing: 2px;
-      color: #fff !important;
-      transition: all 0.3s ease;
-    }
-
-    .navbar-brand:hover {
-      transform: scale(1.05);
-      color: var(--accent-light) !important;
-    }
-
-    .nav-link {
-      color: rgba(255, 255, 255, 0.8) !important;
-      font-weight: 500;
-      margin: 0 0.5rem;
-      transition: all 0.3s ease;
-      position: relative;
-      padding: 0.5rem 1rem !important;
-    }
-
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: var(--accent);
-      transition: all 0.3s ease;
-      transform: translateX(-50%);
-    }
-
-    .nav-link:hover,
-    .nav-link.active {
-      color: #fff !important;
-    }
-
-    .nav-link:hover::after,
-    .nav-link.active::after {
-      width: 80%;
-    }
-
-    section {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      padding: 80px 0;
-    }
-
-    .animated-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 0;
-    }
-
-    .animated-bg::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, 
-        rgba(231, 76, 60, 0.1) 0%, 
-        rgba(52, 73, 94, 0.1) 50%, 
-        rgba(231, 76, 60, 0.1) 100%);
-      animation: gradientShift 15s ease infinite;
-    }
-
-    @keyframes gradientShift {
-      0%, 100% { transform: translate(0, 0) rotate(0deg); }
-      33% { transform: translate(5%, 5%) rotate(120deg); }
-      66% { transform: translate(-5%, 5%) rotate(240deg); }
-    }
-
-    #home {
-      background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
-      color: white;
-      position: relative;
-    }
-
-    .hero-content {
-      z-index: 2;
-      position: relative;
-      text-align: center;
-      animation: fadeInUp 1s ease;
-    }
-
-    .hero-content h1 {
-      font-size: 4.5rem;
-      font-weight: 900;
-      margin-bottom: 1rem;
-      line-height: 1.2;
-      animation: fadeInUp 1s ease 0.2s both;
-    }
-
-    .hero-content .subtitle {
-      font-size: 1.8rem;
-      font-weight: 300;
-      margin-bottom: 0.5rem;
-      animation: fadeInUp 1s ease 0.4s both;
-    }
-
-    .hero-content .university {
-      font-size: 1.2rem;
-      opacity: 0.8;
-      margin-bottom: 2.5rem;
-      animation: fadeInUp 1s ease 0.6s both;
-    }
-
-    .hero-buttons {
-      animation: fadeInUp 1s ease 0.8s both;
-    }
-
-    .btn-hero {
-      padding: 1rem 2.5rem;
-      font-size: 1.1rem;
-      font-weight: 600;
-      border-radius: 50px;
-      margin: 0.5rem;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .btn-hero-primary {
-      background: var(--accent);
-      border: 2px solid var(--accent);
-      color: white;
-    }
-
-    .btn-hero-primary:hover {
-      background: transparent;
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4);
-    }
-
-    .btn-hero-secondary {
-      background: transparent;
-      border: 2px solid white;
-      color: white;
-    }
-
-    .btn-hero-secondary:hover {
-      background: white;
-      color: var(--primary);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    #about {
-      background: var(--light);
-    }
-
-    #about .container {
-      z-index: 2;
-      position: relative;
-    }
-
-    .about-image {
-      position: relative;
-      animation: fadeInLeft 1s ease;
-    }
-
-    .about-image img {
-      border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      transition: all 0.3s ease;
-      width: 100%;
-      max-width: 500px;
-    }
-
-    .about-image img:hover {
-      transform: scale(1.05) rotate(2deg);
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
-    }
-
-    .about-content {
-      animation: fadeInRight 1s ease;
-    }
-
-    .about-content h2 {
-      font-size: 3.5rem;
-      margin-bottom: 2rem;
-      color: var(--primary);
-      position: relative;
-      display: inline-block;
-    }
-
-    .about-content h2::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 0;
-      width: 60px;
-      height: 4px;
-      background: var(--accent);
-    }
-
-    .about-content p {
-      font-size: 1.2rem;
-      line-height: 1.8;
-      color: var(--text-light);
-      margin-bottom: 2rem;
-    }
-
-    .btn-about {
-      padding: 0.8rem 2rem;
-      font-size: 1rem;
-      font-weight: 600;
-      border-radius: 50px;
-      background: var(--accent);
-      border: none;
-      color: white;
-      transition: all 0.3s ease;
-    }
-
-    .btn-about:hover {
-      background: var(--primary);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(44, 62, 80, 0.3);
-    }
-
-    @keyframes fadeInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes fadeInRight {
-      from {
-        opacity: 0;
-        transform: translateX(50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    #skills {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      color: white;
-    }
-
-    #skills .container {
-      z-index: 2;
-      position: relative;
-    }
-
-    #skills h2 {
-      font-size: 3.5rem;
-      margin-bottom: 3rem;
-      text-align: center;
-    }
-
-    .skill-card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      padding: 2.5rem;
-      transition: all 0.3s ease;
-      height: 100%;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .skill-card:hover {
-      transform: translateY(-10px);
-      background: rgba(255, 255, 255, 0.15);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    }
-
-    .skill-card i {
-      font-size: 3.5rem;
-      margin-bottom: 1.5rem;
-      display: block;
-    }
-
-    .skill-card h5 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-    }
-
-    .skill-card p {
-      font-size: 1rem;
-      opacity: 0.9;
-    }
-
-    .skill-html { color: #E44D26; }
-    .skill-css { color: #264DE4; }
-    .skill-python { color: #FFD43B; }
-    .skill-java { color: #007396; }
-
-    #projects {
-      background: var(--light);
-    }
-
-    #projects .container {
-      z-index: 2;
-      position: relative;
-    }
-
-    #projects h2 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      text-align: center;
-      color: var(--primary);
-    }
-
-    #projects > .container > p {
-      text-align: center;
-      font-size: 1.2rem;
-      color: var(--text-light);
-      margin-bottom: 3rem;
-    }
-
-    .project-card {
-      border: none;
-      border-radius: 20px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      height: 100%;
-    }
-
-    .project-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-    }
-
-    .project-card img {
-      height: 250px;
-      object-fit: cover;
-      transition: all 0.3s ease;
-    }
-
-    .project-card:hover img {
-      transform: scale(1.1);
-    }
-
-    .project-card .card-body {
-      padding: 2rem;
-    }
-
-    .project-card .card-title {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: var(--primary);
-    }
-
-    .project-card .card-text {
-      color: var(--text-light);
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-    }
-
-    .btn-project {
-      background: var(--accent);
-      border: none;
-      color: white;
-      padding: 0.6rem 1.5rem;
-      border-radius: 50px;
-      transition: all 0.3s ease;
-      font-weight: 600;
-    }
-
-    .btn-project:hover {
-      background: var(--primary);
-      transform: translateX(5px);
-    }
-
-    #contact {
-      background: linear-gradient(135deg, var(--secondary) 0%, var(--dark) 100%);
-      color: white;
-    }
-
-    #contact .container {
-      z-index: 2;
-      position: relative;
-    }
-
-    #contact h2 {
-      font-size: 3.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .contact-info {
-      font-size: 1.3rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .contact-info i {
-      font-size: 1.5rem;
-      margin-right: 1rem;
-      color: var(--accent-light);
-    }
-
-    .contact-info a {
-      color: white;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .contact-info a:hover {
-      color: var(--accent-light);
-    }
-
-    .contact-message {
-      font-size: 1.2rem;
-      font-style: italic;
-      opacity: 0.9;
-      margin-top: 2rem;
-      padding: 1.5rem;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      border-left: 4px solid var(--accent);
-    }
-
-    footer {
-      background: var(--dark);
-      color: white;
-      padding: 2rem 0;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-
-    footer a {
-      color: var(--accent-light);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 768px) {
-      .hero-content h1 {
-        font-size: 2.5rem;
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Eric Serenio - Portfolio</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Work+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #2c3e50;
+        --secondary: #34495e;
+        --accent: #e74c3c;
+        --accent-light: #ff6b6b;
+        --light: #ecf0f1;
+        --dark: #1a252f;
+        --text-dark: #2c3e50;
+        --text-light: #7f8c8d;
       }
 
-      .hero-content .subtitle {
-        font-size: 1.3rem;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
 
-      .about-content h2,
-      #skills h2,
-      #projects h2,
-      #contact h2 {
-        font-size: 2.5rem;
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Work Sans", sans-serif;
+        color: var(--text-dark);
+        overflow-x: hidden;
+        background: var(--light);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+      }
+
+      .navbar {
+        background: rgba(26, 37, 47, 0.95) !important;
+        backdrop-filter: blur(10px);
+        padding: 1.2rem 0;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-brand {
+        font-family: "Playfair Display", serif;
+        font-size: 1.8rem;
+        font-weight: 900;
+        letter-spacing: 2px;
+        color: #fff !important;
+        transition: all 0.3s ease;
+      }
+
+      .navbar-brand:hover {
+        transform: scale(1.05);
+        color: var(--accent-light) !important;
+      }
+
+      .nav-link {
+        color: rgba(255, 255, 255, 0.8) !important;
+        font-weight: 500;
+        margin: 0 0.5rem;
+        transition: all 0.3s ease;
+        position: relative;
+        padding: 0.5rem 1rem !important;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: var(--accent);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        color: #fff !important;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 80%;
       }
 
       section {
-        min-height: auto;
-        padding: 60px 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: 80px 0;
       }
-    }
 
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
-</head>
-
-<body>
-
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-  <div class="container">
-    <a class="navbar-brand" href="#home">SERENIO</a>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navMenu">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<section id="home">
-  <div class="animated-bg"></div>
-  <div class="container hero-content">
-    <h1>Hi, I'm Eric Serenio</h1>
-    <p class="subtitle">Aspiring Web Developer & IT Student</p>
-    <p class="university">University of Mindanao · 2nd Year</p>
-    <div class="hero-buttons">
-      <a href="#projects" class="btn btn-hero btn-hero-primary">View Projects</a>
-      <a href="#contact" class="btn btn-hero btn-hero-secondary">Contact Me</a>
-    </div>
-  </div>
-</section>
-
-<section id="about">
-  <div class="animated-bg"></div>
-  <div class="container">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-5 fade-in">
-        <div class="about-image text-center">
-          <img src="ERIC.jfif" alt="Eric Serenio" class="img-fluid">
-        </div>
-      </div>
-
-      <div class="col-lg-7 fade-in">
-        <div class="about-content">
-          <h2>About Me</h2>
-          <p>
-            I am a dedicated Information Technology student with a growing passion for web development.
-            I enjoy transforming ideas into responsive and user-friendly websites using HTML, CSS,
-            Bootstrap, and JavaScript. I continuously improve my skills through hands-on projects,
-            collaboration, and real-world practice.
-          </p>
-          <p>
-            My journey in web development is driven by curiosity and a desire to create digital experiences
-            that make a difference. I'm always eager to learn new technologies and take on challenging projects
-            that push my boundaries.
-          </p>
-          <a href="tenkaichi.html" target="_blank" class="btn btn-about">Learn More</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="skills">
-  <div class="animated-bg"></div>
-  <div class="container">
-    <h2 class="fade-in">My Skills</h2>
-
-    <div class="row g-4 justify-content-center">
-      <div class="col-md-6 col-lg-3 fade-in">
-        <div class="skill-card text-center">
-          <i class="bi bi-filetype-html skill-html"></i>
-          <h5>HTML</h5>
-          <p>Semantic structure & page layout for modern web applications</p>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3 fade-in">
-        <div class="skill-card text-center">
-          <i class="bi bi-filetype-css skill-css"></i>
-          <h5>CSS</h5>
-          <p>Responsive design & advanced styling techniques</p>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3 fade-in">
-        <div class="skill-card text-center">
-          <i class="bi bi-file-earmark-code skill-python"></i>
-          <h5>Python</h5>
-          <p>Programming logic & problem-solving fundamentals</p>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3 fade-in">
-        <div class="skill-card text-center">
-          <i class="bi bi-file-earmark-code skill-java"></i>
-          <h5>Java</h5>
-          <p>Object-oriented programming & software development</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="projects">
-  <div class="animated-bg"></div>
-  <div class="container">
-    <h2 class="fade-in">Work Immersion Projects</h2>
-    <p class="fade-in">Real-world experience and practical application of my skills</p>
-
-    <div class="row g-4">
-      <div class="col-md-6 col-lg-4 fade-in">
-        <div class="card project-card">
-          <img src="https://lh7-rt.googleusercontent.com/sitesz/AClOY7pD5wSWqpU7qYBIegbYQnSa-ii96427oP3IoiujosNvO6zZxhbwcLLELms4LmQLTbSZYu5oNImt0XuNLxSmVyDupmh8XBmdyE_VSR_rFNK3aRkgCHQ8bv_pVaKA_uCNziUnaGx-Yo75SGTjtKi3Y8B34k3980xKw9RlHJP9huA8LJ2i9uASz1OumKITCJp7?key=XqvpcY7ibSYnO0Emqjp5Zg" class="card-img-top" alt="Uniform Design">
-          <div class="card-body">
-            <h5 class="card-title">Uniform Design Project</h5>
-            <p class="card-text">
-              Designed school uniforms focusing on comfort, branding, and visual identity using digital design tools.
-            </p>
-            <a href="#" class="btn btn-project">View Details <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4 fade-in">
-        <div class="card project-card">
-          <img src="https://lh7-rt.googleusercontent.com/sitesz/AClOY7r37XRUBGV1H79_X0XCun-jHWixaDoka9jT2c-fObcFjnXGEwUJyka85b9pIFGwRHUEPKEBCvduQQtPTdZD51hGi08wjqIDpbm0XA_izj1RBFPGc_q68E1oGogCjf54Cj0mLUDsdjvQzuylvKipY8dU2D4TdEpWNo5WY4mIBoas4y7E511N_iV68V-2Qhyc?key=XqvpcY7ibSYnO0Emqjp5Zg" class="card-img-top" alt="System Unit Assembly">
-          <div class="card-body">
-            <h5 class="card-title">System Unit Assembly</h5>
-            <p class="card-text">
-              Assembled and tested over a hundred system units, ensuring proper hardware configuration and functionality.
-            </p>
-            <a href="#" class="btn btn-project">View Details <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4 fade-in">
-        <div class="card project-card">
-          <img src="SAM.jfif" class="card-img-top" alt="Promotional Flyer">
-          <div class="card-body">
-            <h5 class="card-title">Promotional Flyer Design</h5>
-            <p class="card-text">
-              Created promotional flyers to support school marketing efforts and increase community engagement.
-            </p>
-            <a href="#" class="btn btn-project">View Details <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="animated-bg"></div>
-  <div class="container text-center">
-    <h2 class="fw-bold mb-3">Contact Me</h2>
-    <div class="contact-info">
-      <i class="bi bi-envelope"></i>
-      <a href="mailto:eric.serenio@example.com">ericserenio2@gmail.com</a>
-    </div>
-    <div class="contact-info">
-      <i class="bi bi-phone"></i>
-      <span>+63 0907 140 4567</span>
-    </div>
-    <div class="contact-message">
-      I'm open to learning opportunities, collaborations, and internships.
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <p>&copy; 2024 Eric Serenio. All rights reserved.</p>
-  </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Fade-in animation
-  const fadeElements = document.querySelectorAll('.fade-in');
-  
-  const fadeObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
+      .animated-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 0;
       }
-    });
-  }, {
-    threshold: 0.1
-  });
-  
-  fadeElements.forEach(el => fadeObserver.observe(el));
 
-  // Custom Navbar Scroll Spy
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-link');
-
-  function updateActiveLink() {
-    let currentSection = '';
-    const scrollPosition = window.scrollY + 200;
-
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
-      const sectionId = section.getAttribute('id');
-      
-      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-        currentSection = sectionId;
+      .animated-bg::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          45deg,
+          rgba(231, 76, 60, 0.1) 0%,
+          rgba(52, 73, 94, 0.1) 50%,
+          rgba(231, 76, 60, 0.1) 100%
+        );
+        animation: gradientShift 15s ease infinite;
       }
-    });
 
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      const href = link.getAttribute('href');
-      if (href === '#' + currentSection) {
-        link.classList.add('active');
-      }
-    });
-  }
-
-  // Update on scroll
-  window.addEventListener('scroll', updateActiveLink);
-  
-  // Update on load
-  updateActiveLink();
-
-  // Smooth scroll for nav links
-  navLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href');
-      if (targetId.startsWith('#')) {
-        e.preventDefault();
-        const targetSection = document.querySelector(targetId);
-        if (targetSection) {
-          window.scrollTo({
-            top: targetSection.offsetTop - 80,
-            behavior: 'smooth'
-          });
+      @keyframes gradientShift {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        33% {
+          transform: translate(5%, 5%) rotate(120deg);
+        }
+        66% {
+          transform: translate(-5%, 5%) rotate(240deg);
         }
       }
-    });
-  });
-});
-</script>
 
-</body>
+      #home {
+        background: linear-gradient(
+          135deg,
+          var(--dark) 0%,
+          var(--primary) 100%
+        );
+        color: white;
+        position: relative;
+      }
+
+      .hero-content {
+        z-index: 2;
+        position: relative;
+        text-align: center;
+        animation: fadeInUp 1s ease;
+      }
+
+      .hero-content h1 {
+        font-size: 4.5rem;
+        font-weight: 900;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+        animation: fadeInUp 1s ease 0.2s both;
+      }
+
+      .hero-content .subtitle {
+        font-size: 1.8rem;
+        font-weight: 300;
+        margin-bottom: 0.5rem;
+        animation: fadeInUp 1s ease 0.4s both;
+      }
+
+      .hero-content .university {
+        font-size: 1.2rem;
+        opacity: 0.8;
+        margin-bottom: 2.5rem;
+        animation: fadeInUp 1s ease 0.6s both;
+      }
+
+      .hero-buttons {
+        animation: fadeInUp 1s ease 0.8s both;
+      }
+
+      .btn-hero {
+        padding: 1rem 2.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 50px;
+        margin: 0.5rem;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .btn-hero-primary {
+        background: var(--accent);
+        border: 2px solid var(--accent);
+        color: white;
+      }
+
+      .btn-hero-primary:hover {
+        background: transparent;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4);
+      }
+
+      .btn-hero-secondary {
+        background: transparent;
+        border: 2px solid white;
+        color: white;
+      }
+
+      .btn-hero-secondary:hover {
+        background: white;
+        color: var(--primary);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      #about {
+        background: var(--light);
+      }
+
+      #about .container {
+        z-index: 2;
+        position: relative;
+      }
+
+      .about-image {
+        position: relative;
+        animation: fadeInLeft 1s ease;
+      }
+
+      .about-image img {
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        width: 100%;
+        max-width: 500px;
+      }
+
+      .about-image img:hover {
+        transform: scale(1.05) rotate(2deg);
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+      }
+
+      .about-content {
+        animation: fadeInRight 1s ease;
+      }
+
+      .about-content h2 {
+        font-size: 3.5rem;
+        margin-bottom: 2rem;
+        color: var(--primary);
+        position: relative;
+        display: inline-block;
+      }
+
+      .about-content h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: var(--accent);
+      }
+
+      .about-content p {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        color: var(--text-light);
+        margin-bottom: 2rem;
+      }
+
+      .btn-about {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 50px;
+        background: var(--accent);
+        border: none;
+        color: white;
+        transition: all 0.3s ease;
+      }
+
+      .btn-about:hover {
+        background: var(--primary);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(44, 62, 80, 0.3);
+      }
+
+      @keyframes fadeInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes fadeInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      #skills {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--secondary) 100%
+        );
+        color: white;
+      }
+
+      #skills .container {
+        z-index: 2;
+        position: relative;
+      }
+
+      #skills h2 {
+        font-size: 3.5rem;
+        margin-bottom: 3rem;
+        text-align: center;
+      }
+
+      .skill-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2.5rem;
+        transition: all 0.3s ease;
+        height: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .skill-card:hover {
+        transform: translateY(-10px);
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .skill-card i {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        display: block;
+      }
+
+      .skill-card h5 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+      }
+
+      .skill-card p {
+        font-size: 1rem;
+        opacity: 0.9;
+      }
+
+      .skill-html {
+        color: #e44d26;
+      }
+      .skill-css {
+        color: #264de4;
+      }
+      .skill-python {
+        color: #ffd43b;
+      }
+      .skill-java {
+        color: #007396;
+      }
+
+      #projects {
+        background: var(--light);
+      }
+
+      #projects .container {
+        z-index: 2;
+        position: relative;
+      }
+
+      #projects h2 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        color: var(--primary);
+      }
+
+      #projects > .container > p {
+        text-align: center;
+        font-size: 1.2rem;
+        color: var(--text-light);
+        margin-bottom: 3rem;
+      }
+
+      .project-card {
+        border: none;
+        border-radius: 20px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        height: 100%;
+      }
+
+      .project-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+      }
+
+      .project-card img {
+        height: 250px;
+        object-fit: cover;
+        transition: all 0.3s ease;
+      }
+
+      .project-card:hover img {
+        transform: scale(1.1);
+      }
+
+      .project-card .card-body {
+        padding: 2rem;
+      }
+
+      .project-card .card-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+      }
+
+      .project-card .card-text {
+        color: var(--text-light);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+      }
+
+      .btn-project {
+        background: var(--accent);
+        border: none;
+        color: white;
+        padding: 0.6rem 1.5rem;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        font-weight: 600;
+      }
+
+      .btn-project:hover {
+        background: var(--primary);
+        transform: translateX(5px);
+      }
+
+      #contact {
+        background: linear-gradient(
+          135deg,
+          var(--secondary) 0%,
+          var(--dark) 100%
+        );
+        color: white;
+      }
+
+      #contact .container {
+        z-index: 2;
+        position: relative;
+      }
+
+      #contact h2 {
+        font-size: 3.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .contact-info {
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .contact-info i {
+        font-size: 1.5rem;
+        margin-right: 1rem;
+        color: var(--accent-light);
+      }
+
+      .contact-info a {
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .contact-info a:hover {
+        color: var(--accent-light);
+      }
+
+      .contact-message {
+        font-size: 1.2rem;
+        font-style: italic;
+        opacity: 0.9;
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        border-left: 4px solid var(--accent);
+      }
+
+      footer {
+        background: var(--dark);
+        color: white;
+        padding: 2rem 0;
+        text-align: center;
+        font-size: 0.9rem;
+      }
+
+      footer a {
+        color: var(--accent-light);
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 768px) {
+        .hero-content h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero-content .subtitle {
+          font-size: 1.3rem;
+        }
+
+        .about-content h2,
+        #skills h2,
+        #projects h2,
+        #contact h2 {
+          font-size: 2.5rem;
+        }
+
+        section {
+          min-height: auto;
+          padding: 60px 0;
+        }
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="#home">SERENIO</a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navMenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#skills">Skills</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#projects">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section id="home">
+      <div class="animated-bg"></div>
+      <div class="container hero-content">
+        <h1>Hi, I'm Eric Serenio</h1>
+        <p class="subtitle">Aspiring Web Developer & IT Student</p>
+        <p class="university">University of Mindanao · 2nd Year</p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-hero btn-hero-primary"
+            >View Projects</a
+          >
+          <a href="#contact" class="btn btn-hero btn-hero-secondary"
+            >Contact Me</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="animated-bg"></div>
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-5 fade-in">
+            <div class="about-image text-center">
+              <img src="ERIC.jfif" alt="Eric Serenio" class="img-fluid" />
+            </div>
+          </div>
+
+          <div class="col-lg-7 fade-in">
+            <div class="about-content">
+              <h2>About Me</h2>
+              <p>
+                I am a dedicated Information Technology student with a growing
+                passion for web development. I enjoy transforming ideas into
+                responsive and user-friendly websites using HTML, CSS,
+                Bootstrap, and JavaScript. I continuously improve my skills
+                through hands-on projects, collaboration, and real-world
+                practice.
+              </p>
+              <p>
+                My journey in web development is driven by curiosity and a
+                desire to create digital experiences that make a difference. I'm
+                always eager to learn new technologies and take on challenging
+                projects that push my boundaries.
+              </p>
+              <a href="tenkaichi.html" target="_blank" class="btn btn-about"
+                >Learn More</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="animated-bg"></div>
+      <div class="container">
+        <h2 class="fade-in">My Skills</h2>
+
+        <div class="row g-4 justify-content-center">
+          <div class="col-md-6 col-lg-3 fade-in">
+            <div class="skill-card text-center">
+              <i class="bi bi-filetype-html skill-html"></i>
+              <h5>HTML</h5>
+              <p>
+                Semantic structure & page layout for modern web applications
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 fade-in">
+            <div class="skill-card text-center">
+              <i class="bi bi-filetype-css skill-css"></i>
+              <h5>CSS</h5>
+              <p>Responsive design & advanced styling techniques</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 fade-in">
+            <div class="skill-card text-center">
+              <i class="bi bi-file-earmark-code skill-python"></i>
+              <h5>Python</h5>
+              <p>Programming logic & problem-solving fundamentals</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 fade-in">
+            <div class="skill-card text-center">
+              <i class="bi bi-file-earmark-code skill-java"></i>
+              <h5>Java</h5>
+              <p>Object-oriented programming & software development</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="animated-bg"></div>
+      <div class="container">
+        <h2 class="fade-in">Work Immersion Projects</h2>
+        <p class="fade-in">
+          Real-world experience and practical application of my skills
+        </p>
+
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4 fade-in">
+            <div class="card project-card">
+              <img src="COM.jpg" class="card-img-top" alt="Uniform Design" />
+              <div class="card-body">
+                <h5 class="card-title">Uniform Design Project</h5>
+                <p class="card-text">
+                  Designed school uniforms focusing on comfort, branding, and
+                  visual identity using digital design tools.
+                </p>
+                <a href="#" class="btn btn-project"
+                  >View Details <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 fade-in">
+            <div class="card project-card">
+              <img
+                src="SYS.jpg"
+                class="card-img-top"
+                alt="System Unit Assembly"
+              />
+              <div class="card-body">
+                <h5 class="card-title">System Unit Assembly</h5>
+                <p class="card-text">
+                  Assembled and tested over a hundred system units, ensuring
+                  proper hardware configuration and functionality.
+                </p>
+                <a href="#" class="btn btn-project"
+                  >View Details <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 fade-in">
+            <div class="card project-card">
+              <img
+                src="SAM.jfif"
+                class="card-img-top"
+                alt="Promotional Flyer"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Promotional Flyer Design</h5>
+                <p class="card-text">
+                  Created promotional flyers to support school marketing efforts
+                  and increase community engagement.
+                </p>
+                <a href="#" class="btn btn-project"
+                  >View Details <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="animated-bg"></div>
+      <div class="container text-center">
+        <h2 class="fw-bold mb-3">Contact Me</h2>
+        <div class="contact-info">
+          <i class="bi bi-envelope"></i>
+          <a href="mailto:eric.serenio@example.com">ericserenio2@gmail.com</a>
+        </div>
+        <div class="contact-info">
+          <i class="bi bi-phone"></i>
+          <span>+63 0907 140 4567</span>
+        </div>
+        <div class="contact-message">
+          I'm open to learning opportunities, collaborations, and internships.
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Eric Serenio. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Fade-in animation
+        const fadeElements = document.querySelectorAll(".fade-in");
+
+        const fadeObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+          },
+        );
+
+        fadeElements.forEach((el) => fadeObserver.observe(el));
+
+        // Custom Navbar Scroll Spy
+        const sections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        function updateActiveLink() {
+          let currentSection = "";
+          const scrollPosition = window.scrollY + 200;
+
+          sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            const sectionId = section.getAttribute("id");
+
+            if (
+              scrollPosition >= sectionTop &&
+              scrollPosition < sectionTop + sectionHeight
+            ) {
+              currentSection = sectionId;
+            }
+          });
+
+          navLinks.forEach((link) => {
+            link.classList.remove("active");
+            const href = link.getAttribute("href");
+            if (href === "#" + currentSection) {
+              link.classList.add("active");
+            }
+          });
+        }
+
+        // Update on scroll
+        window.addEventListener("scroll", updateActiveLink);
+
+        // Update on load
+        updateActiveLink();
+
+        // Smooth scroll for nav links
+        navLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            const targetId = this.getAttribute("href");
+            if (targetId.startsWith("#")) {
+              e.preventDefault();
+              const targetSection = document.querySelector(targetId);
+              if (targetSection) {
+                window.scrollTo({
+                  top: targetSection.offsetTop - 80,
+                  behavior: "smooth",
+                });
+              }
+            }
+          });
+        });
+      });
+    </script>
+  </body>
 </html>
